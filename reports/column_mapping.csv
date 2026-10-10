@@ -1,0 +1,30 @@
+standard_name,raw_names,dtype,unit,definition
+elapsed_time,hh:mm:ss,object/time,—,Elapsed time within recording session (HH:MM:SS). Resets at 00:00:00 for each file.
+elapsed_seconds,elapsed_seconds,float64,seconds,Elapsed time converted to integer seconds. Used for time-series indexing.
+source_file,source_file,str,—,Original Excel filename this row was loaded from.
+source_sheet,source_sheet,str,—,Excel sheet name this row was loaded from.
+recording_date,recording_date,str,YYYY-MM-DD,Date inferred from filename (DDMMYY pattern). Not verified against aircraft records.
+aircraft_type,aircraft type,str,—,Aircraft model identifier. Value 'S76A/C+' = Sikorsky S-76A/C+.
+E1NF_S76C,e1nf s76c,float64,%,Engine 1 Gas Generator (N1/Nf) speed. Normal cruise ~107%. Values >120% are fault sentinels.
+E2NF_S76C,e2nf s76c,float64,%,Engine 2 Gas Generator (N1/Nf) speed. Normal cruise ~68% (one engine powering rotor).
+E2NF_raw,e2nf,float64,%,Engine 2 Nf duplicate channel present in some files. Relationship to E2NF_S76C unverified.
+E1TQ_S76C,e1tq s76c,float64,%,Engine 1 Torque. Normal cruise 40–90%. Values >130% are fault sentinels.
+E2TQ_S76C,e2tq s76c,float64,%,Engine 2 Torque. Normal cruise 40–90%.
+E1_OIL_PRS,e1oilprs,str,On/Off,Engine 1 Oil Pressure warning flag. On = warning active.
+E2_OIL_PRS,e2oilprs,str,On/Off,Engine 2 Oil Pressure warning flag. On = warning active.
+XMSN_OIL_PRS,main transmission oil pressure,str,On/Off,Main Transmission Oil Pressure warning flag.
+XMSN_OIL_TEMP,main transmission oil temp,str,On/Off,Main Transmission Oil Temperature warning flag.
+RTRSPD,rtrspd,float64,%,Main Rotor Speed. Normal 100%. Values >115% are fault sentinels.
+ROTBRK,rotbrk,str,On/Off,Rotor Brake engaged flag.
+PRALT,pralt,float64,ft,Pressure Altitude. Normal range −300 to ~10 000 ft. Value −16 300 = sensor invalid sentinel.
+MAGHDG,maghdg,float64,degrees,Magnetic Heading. 0–360°.
+Indicated_Airspeed,indicated airspeed,float64,knots,Indicated Airspeed. Vne ~155 kn. Values >200 kn are fault sentinels.
+IAS_flag,ias,str,On/Off,Airspeed valid flag (On/Off string). Separate from numeric Indicated_Airspeed.
+OAT,oat,float64,°C,Outside Air Temperature. Normal −40 to +55°C. Values ±~530 are fault sentinels.
+BATT_OVERTEMP,battery overtemp,str,On/Off,Battery Overtemperature warning flag.
+HYPRS1,hyprs1,str,On/Off,Hydraulic System 1 Pressure warning flag.
+HYPRS2,hyprs2,str,On/Off,Hydraulic System 2 Pressure warning flag.
+HYSEL1,hysel1,str,On/Off,Hydraulic Selector 1 position.
+HYSEL2,hysel2,str,On/Off,Hydraulic Selector 2 position.
+PITCH,pitch,float64,degrees,Aircraft pitch angle. ±180° range in raw data; real ±60° for normal operations.
+ROLL,roll,float64,degrees,Aircraft roll angle. ±180° range in raw data; real ±60° for normal operations.

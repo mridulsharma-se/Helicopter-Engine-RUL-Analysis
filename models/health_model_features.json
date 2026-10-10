@@ -1,0 +1,28 @@
+{
+  "features": [
+    "E1NF_S76C",
+    "E2NF_S76C",
+    "E1TQ_S76C",
+    "E2TQ_S76C",
+    "RTRSPD",
+    "OAT",
+    "Indicated_Airspeed",
+    "PRALT",
+    "E1NF_S76C_roll30s_mean",
+    "E2NF_S76C_roll30s_mean",
+    "E1TQ_S76C_roll30s_mean",
+    "E2TQ_S76C_roll30s_mean",
+    "E1NF_S76C_roll300s_mean",
+    "E1TQ_S76C_roll300s_mean",
+    "E1NF_S76C_roll30s_std",
+    "E1TQ_S76C_roll30s_std",
+    "cum_op_seconds",
+    "E1_OIL_PRS_bin",
+    "E2_OIL_PRS_bin",
+    "BATT_OVERTEMP_bin",
+    "XMSN_OIL_PRS_bin",
+    "XMSN_OIL_TEMP_bin"
+  ],
+  "target": "any_exceedance",
+  "best_model": "Random Forest"
+}

@@ -1,0 +1,18 @@
+{
+  "features": [
+    "E1TQ_S76C",
+    "E2TQ_S76C",
+    "E1NF_S76C",
+    "E2NF_S76C",
+    "RTRSPD",
+    "OAT",
+    "Indicated_Airspeed",
+    "PRALT",
+    "E1TQ_S76C_roll30s_mean",
+    "E1TQ_S76C_roll30s_std",
+    "E1NF_S76C_roll30s_mean",
+    "cum_op_seconds"
+  ],
+  "target": "E1TQ_S76C_next",
+  "best_model": "XGBoost"
+}

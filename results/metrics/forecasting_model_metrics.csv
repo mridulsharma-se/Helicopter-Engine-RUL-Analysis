@@ -1,0 +1,5 @@
+model,MAE_%,RMSE_%,R2
+Persistence,1.402,2.143,0.9935
+Linear Regression,1.413,2.105,0.9937
+Random Forest,1.255,1.782,0.9955
+XGBoost,1.247,1.765,0.9956

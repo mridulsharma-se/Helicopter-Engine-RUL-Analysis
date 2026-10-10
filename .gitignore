@@ -1,0 +1,17 @@
+# Raw and processed datasets (exceed GitHub size limits)
+data/raw/
+data/processed/
+
+# Python cache & virtual environment
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# OS & IDE specific files
+.DS_Store
+Thumbs.db
+.agents/
+.claude/

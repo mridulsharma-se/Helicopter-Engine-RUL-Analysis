@@ -1,0 +1,5 @@
+model,accuracy,precision,recall,f1,roc_auc
+Baseline (majority),0.8154,0.0,0.0,0.0,0.5
+Logistic Regression,0.9995,0.9986,0.9985,0.9986,1.0
+Random Forest,1.0,1.0,1.0,1.0,1.0
+XGBoost,1.0,1.0,1.0,1.0,1.0

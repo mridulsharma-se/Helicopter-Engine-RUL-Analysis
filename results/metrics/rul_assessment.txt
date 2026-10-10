@@ -1,0 +1,56 @@
+
+============================================================
+RUL PREDICTION ASSESSMENT
+Aircraft: Sikorsky S-76A/C+  (confirmed from dataset)
+============================================================
+
+CONCLUSION: SUPERVISED RUL PREDICTION IS NOT SUPPORTED
+           BY THE AVAILABLE DATASET.
+
+EVIDENCE:
+
+1. NO cumulative engine operating hours (CSOH/CSN) column exists.
+   The 'HH:MM:SS' column records elapsed time within a single
+   recording session only.  It resets to 00:00:00 at the start
+   of each file.  There is no cross-file cumulative counter.
+
+2. NO engine failure or end-of-life event is recorded.
+   A supervised RUL model requires observations labelled with
+   time-to-failure.  Without at least one documented failure,
+   no target can be constructed.
+
+3. NO Time Between Overhaul (TBO) or Time Before Removal (TBR)
+   data is available.  For the Allison 250-C30S, TBO is typically
+   3 500 hours, but the current engine life position within that
+   interval is unknown.
+
+4. NO maintenance records, component replacement logs, or
+   engine logbook data are present in the supplied files.
+
+5. The nine recording sessions span 2025-11-09 to 2026-06-24
+   (inferred from filenames).  Total recorded time across all
+   files is approximately 3.2 million seconds (~887 hours).
+   Without knowing the engine's operating history before the
+   first recording, no absolute life position can be computed.
+
+WHAT IS NEEDED TO ENABLE RUL PREDICTION:
+
+  A. Engine logbook data: installation date, current CSOH,
+     date of last overhaul.
+  B. Airframe total time and cycles.
+  C. At least one documented engine-life endpoint (failure or
+     scheduled overhaul) to construct a supervised target.
+  D. Continuous cumulative operating-hours counter across all
+     recording sessions.
+
+TASKS THAT ARE SUPPORTED BY THE CURRENT DATASET:
+
+  1. Exceedance detection (binary classification — implemented).
+  2. One-step-ahead engine parameter forecasting (regression — implemented).
+  3. Descriptive health scoring from exceedance frequency
+     (no supervised label required).
+
+DO NOT interpret the exceedance detection model or the parameter
+forecasting model as an RUL prediction model.  They address
+different questions.
+============================================================

@@ -1,0 +1,80 @@
+======================================================================
+DATA QUALITY REPORT — KNH Exceedance Dataset (Sikorsky S-76A/C+)
+======================================================================
+
+Total rows: 3,358,499
+Total columns: 40
+Source files: 9
+Date range (from filenames): 2025-01-12 to 2026-06-24
+
+--- MISSING VALUES ---
+  E1NF_S76C_plus                          : 3,123,256  (93.0%)
+  ROLL                                    : 2,684,351  (79.9%)
+  PITCH                                   : 2,684,351  (79.9%)
+  ROLL_fault                              : 2,683,665  (79.9%)
+  PITCH_fault                             : 2,683,665  (79.9%)
+  IAS_flag                                : 2,449,109  (72.9%)
+  E2NF_raw                                : 2,449,108  (72.9%)
+  HYPRS2                                  :  912,293  (27.2%)
+  HYSEL2                                  :  912,293  (27.2%)
+  HYSEL1                                  :  912,293  (27.2%)
+  HYPRS1                                  :  912,293  (27.2%)
+  XMSN_OIL_PRS                            :    2,903  (0.1%)
+  BATT_OVERTEMP                           :    2,903  (0.1%)
+  E1TQ_S76C                               :    2,903  (0.1%)
+  XMSN_OIL_TEMP                           :    2,903  (0.1%)
+  E2TQ_S76C                               :    2,903  (0.1%)
+  E1_OIL_PRS                              :    2,903  (0.1%)
+  E2_OIL_PRS                              :    2,903  (0.1%)
+  Indicated_Airspeed                      :    2,903  (0.1%)
+  MAGHDG                                  :    2,903  (0.1%)
+  PRALT                                   :    2,903  (0.1%)
+  RTRSPD                                  :    2,903  (0.1%)
+  aircraft_type                           :    2,902  (0.1%)
+  E1NF_S76C                               :    2,902  (0.1%)
+  E2NF_S76C                               :    2,902  (0.1%)
+  OAT                                     :    2,011  (0.1%)
+  ROTBRK                                  :      103  (0.0%)
+
+--- FAULT-SENTINEL COUNTS (values outside plausible physical range) ---
+  PRALT_fault                                  :   12,142  (0.36%)
+  OAT_fault                                    :   12,230  (0.36%)
+  E1NF_S76C_fault                              :      543  (0.02%)
+  E2NF_S76C_fault                              :      897  (0.03%)
+  E1TQ_S76C_fault                              :      387  (0.01%)
+  E2TQ_S76C_fault                              :    1,937  (0.06%)
+  RTRSPD_fault                                 :        8  (0.00%)
+  Indicated_Airspeed_fault                     :   11,586  (0.34%)
+  PITCH_fault                                  :   76,722  (2.28%)
+  ROLL_fault                                   :        0  (0.00%)
+
+--- DUPLICATE ROW COUNT ---
+  Exact duplicate rows: 0
+
+--- SCHEMA VARIATION ACROSS FILES ---
+  KNH Exceedance 030226.xlsx: 33 non-empty columns
+  KNH Exceedance 091125.xlsx: 35 non-empty columns
+  KNH Exceedance 120125.xlsx: 32 non-empty columns
+  KNH Exceedance 120526.xlsx: 33 non-empty columns
+  KNH Exceedance 200426.xlsx: 33 non-empty columns
+  KNH Exceedance 210326.xlsx: 33 non-empty columns
+  KNH Exceedance 260625.xlsx: 35 non-empty columns
+  KNH Exceedance 300526.xlsx: 33 non-empty columns
+  KNh Exceedance 240626.xlsx: 33 non-empty columns
+
+--- RUL ASSESSMENT ---
+  No engine failure events found in the dataset.
+  No cumulative engine operating hours column found.
+  No maintenance records or engine-life data found.
+  RUL prediction with a supervised label is NOT SUPPORTED by this dataset.
+  Supported tasks: engine health scoring, exceedance detection,
+                   next-step parameter forecasting.
+
+--- AIRCRAFT IDENTITY ---
+  Aircraft Type: Sikorsky S-76A/C+ (confirmed from 'Aircraft Type' column)
+  Engine:        Two Allison 250-C30S turboshaft engines (E1 and E2)
+  Data source:   Flight Data Monitoring system (continuous 1-Hz recording)
+  'Exceedance' label in filename does NOT mean exceedance-event records.
+  Each file contains full continuous sensor data for one recording session.
+
+======================================================================
