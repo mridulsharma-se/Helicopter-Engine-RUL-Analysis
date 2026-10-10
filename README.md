@@ -43,24 +43,34 @@ Key engineering and data science findings:
 
 ```
 helicopter-rul-project/
-├── app.py                      # Interactive Streamlit dashboard
+├── main.py                     # Root execution script (runs pipeline end-to-end)
+├── app.py                      # Interactive Streamlit dashboard & live predictor
+├── requirements.txt            # Project dependencies
+├── LICENSE                     # MIT Open Source License
+├── README.md                   # Project documentation
+├── notebooks/
+│   └── helicopter_engine_analysis.ipynb # End-to-end analysis & model notebook
 ├── data/
-│   ├── raw/                    # Symlinks/copies of source Excel files
-│   └── processed/              # Parquet files (consolidated & feature datasets)
+│   ├── README.md               # Data storage & pipeline guide
+│   ├── raw/                    # Source Excel telemetry files (git-ignored)
+│   └── processed/              # Parquet consolidated datasets (git-ignored)
 ├── models/
-│   ├── health_model.pkl        # Best trained exceedance/health model
+│   ├── README.md               # Model catalog & artifact documentation
+│   ├── health_model.pkl        # Pre-trained Random Forest health classifier
 │   ├── health_model_features.json
-│   ├── forecasting_model.pkl   # Best trained parameter forecasting model
+│   ├── forecasting_model.pkl   # Pre-trained XGBoost torque forecasting regressor
 │   └── forecasting_model_features.json
 ├── reports/
 │   ├── dataset_inventory.csv   # Comprehensive inventory across all 9 workbooks
 │   ├── column_mapping.csv      # Standardized telemetry schema dictionary
 │   ├── data_quality_report.txt # Missing values, duplicates, and sentinel audit
-│   └── flight_duration_report.csv # Flight segmentation and 3-hour constraint check
+│   ├── flight_duration_report.csv # Flight segmentation and 3-hour constraint check
+│   └── final_project_report.md # Full scientific research report
 ├── results/
-│   ├── figures/                # EDA & model evaluation plots (PNG)
-│   └── metrics/                # Metrics CSVs & RUL assessment manifesto
+│   ├── figures/                # 13 generated EDA & evaluation plots (PNG)
+│   └── metrics/                # Metrics tables & formal RUL assessment manifesto
 ├── src/
+│   ├── __init__.py             # Package init
 │   ├── data_loader.py          # Schema mapping, fault sentinel masking, ingestion
 │   ├── dataset_consolidation.py# Master consolidation & quality audits
 │   ├── flight_segmentation.py  # Vectorized sortie segmentation & duration checks
@@ -71,9 +81,9 @@ helicopter-rul-project/
 │   ├── train_rul_model.py      # Formal RUL gap analysis and manifesto
 │   ├── predict.py              # Inference interface for scoring new telemetry
 │   └── run_pipeline.py         # End-to-end master pipeline runner
-├── tests/
-│   └── test_pipeline.py        # Comprehensive test suite (unittest)
-└── requirements.txt            # Project dependencies
+└── tests/
+    ├── __init__.py             # Test package init
+    └── test_pipeline.py        # Comprehensive test suite (10/10 passing)
 ```
 
 ---
