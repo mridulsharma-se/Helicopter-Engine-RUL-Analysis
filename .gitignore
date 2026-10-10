@@ -1,17 +1,59 @@
-# Raw and processed datasets (exceed GitHub size limits)
-data/raw/
-data/processed/
-
-# Python cache & virtual environment
+# Byte-compiled / optimized files
 __pycache__/
-*.pyc
-*.pyo
-.venv/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
 venv/
 env/
+ENV/
+.venv/
+.env
 
-# OS & IDE specific files
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# IDE and OS specific files
 .DS_Store
 Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
 .agents/
 .claude/
+
+# Raw and processed datasets (exceed GitHub size limits)
+# Keep folder hierarchy via .gitkeep
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Ignore local large datasets or excel files in root
+*.parquet
+*.xlsx
+*.xls

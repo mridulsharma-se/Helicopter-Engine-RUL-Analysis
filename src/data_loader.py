@@ -190,12 +190,25 @@ def load_all(data_dir: Path | None = None) -> pd.DataFrame:
     Load and vertically concatenate all Excel files in data_dir.
     Files with incompatible extra columns retain them with NaN in other files.
     """
-    data_dir = Path(data_dir) if data_dir else RAW_DIR
-    files = sorted(data_dir.glob("*.xlsx")) + sorted(data_dir.glob("*.xls"))
+    target_dir = Path(data_dir) if data_dir else RAW_DIR
+    files = sorted(target_dir.glob("*.xlsx")) + sorted(target_dir.glob("*.xls"))
     files = [f for f in files if not f.name.startswith("~")]
 
+    # If no files found in RAW_DIR, check parent workspace directory
+    if not files and not data_dir:
+        parent_candidate = RAW_DIR.resolve().parent.parent.parent
+        files = sorted(parent_candidate.glob("*.xlsx")) + sorted(parent_candidate.glob("*.xls"))
+        files = [f for f in files if not f.name.startswith("~")]
+        if files:
+            print(f"  Found {len(files)} Excel files in parent workspace: {parent_candidate}")
+
     if not files:
-        raise FileNotFoundError(f"No Excel files found in {data_dir}")
+        # Check sample fallback
+        sample_path = RAW_DIR.parent / "sample" / "sample_telemetry.csv"
+        if sample_path.exists():
+            print(f"  No Excel files found; loading sample data from {sample_path.name} ...")
+            return pd.read_csv(sample_path)
+        raise FileNotFoundError(f"No Excel files found in {target_dir} or parent directories.")
 
     frames = []
     for fp in files:
@@ -210,13 +223,6 @@ def load_all(data_dir: Path | None = None) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    # Quick smoke-test: load from raw directory symlinked to actual data
-    import sys
-    src = Path("/Users/mridulsharma/Documents/model")
-    for f in src.glob("*.xlsx"):
-        dest = RAW_DIR / f.name
-        if not dest.exists():
-            dest.symlink_to(f)
     df = load_all()
     out = PROC_DIR / "consolidated_dataset.parquet"
     df.to_parquet(out, index=False)

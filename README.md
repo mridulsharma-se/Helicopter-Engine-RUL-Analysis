@@ -42,24 +42,34 @@ Key engineering and data science findings:
 ## 3. Project Directory Structure
 
 ```
-helicopter-rul-project/
+Helicopter-Engine-RUL-Analysis/
+├── .github/
+│   └── workflows/
+│       └── ci.yml              # Automated continuous integration test suite
+├── .gitignore                  # Git ignore rules preserving directory hierarchy
+├── LICENSE                     # MIT Open Source License
+├── README.md                   # Project architecture, scientific findings, & guide
+├── pyproject.toml              # PEP 517/621 project configuration & package build
+├── setup.py                    # Backward-compatible package setup
+├── requirements.txt            # Pinned dependency specifications
 ├── main.py                     # Root execution script (runs pipeline end-to-end)
 ├── app.py                      # Interactive Streamlit dashboard & live predictor
-├── requirements.txt            # Project dependencies
-├── LICENSE                     # MIT Open Source License
-├── README.md                   # Project documentation
-├── notebooks/
-│   └── helicopter_engine_analysis.ipynb # End-to-end analysis & model notebook
 ├── data/
 │   ├── README.md               # Data storage & pipeline guide
-│   ├── raw/                    # Source Excel telemetry files (git-ignored)
-│   └── processed/              # Parquet consolidated datasets (git-ignored)
+│   ├── sample/
+│   │   └── sample_telemetry.csv# Runnable sample telemetry for testing & demo
+│   ├── raw/
+│   │   └── .gitkeep            # Raw 1-Hz Excel telemetry destination (git-ignored)
+│   └── processed/
+│       └── .gitkeep            # Parquet consolidated dataset destination (git-ignored)
 ├── models/
 │   ├── README.md               # Model catalog & artifact documentation
 │   ├── health_model.pkl        # Pre-trained Random Forest health classifier
 │   ├── health_model_features.json
 │   ├── forecasting_model.pkl   # Pre-trained XGBoost torque forecasting regressor
 │   └── forecasting_model_features.json
+├── notebooks/
+│   └── helicopter_engine_analysis.ipynb # End-to-end analysis & model notebook
 ├── reports/
 │   ├── dataset_inventory.csv   # Comprehensive inventory across all 9 workbooks
 │   ├── column_mapping.csv      # Standardized telemetry schema dictionary
@@ -67,7 +77,7 @@ helicopter-rul-project/
 │   ├── flight_duration_report.csv # Flight segmentation and 3-hour constraint check
 │   └── final_project_report.md # Full scientific research report
 ├── results/
-│   ├── figures/                # 13 generated EDA & evaluation plots (PNG)
+│   ├── figures/                # 18 generated EDA & evaluation plots (PNG)
 │   └── metrics/                # Metrics tables & formal RUL assessment manifesto
 ├── src/
 │   ├── __init__.py             # Package init
@@ -83,7 +93,7 @@ helicopter-rul-project/
 │   └── run_pipeline.py         # End-to-end master pipeline runner
 └── tests/
     ├── __init__.py             # Test package init
-    └── test_pipeline.py        # Comprehensive test suite (10/10 passing)
+    └── test_pipeline.py        # Comprehensive test suite (11/11 passing)
 ```
 
 ---

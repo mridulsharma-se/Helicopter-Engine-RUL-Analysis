@@ -63,21 +63,45 @@ def predict_next_torque(df: pd.DataFrame) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
+    import argparse
     import pandas as pd
     from feature_engineering import build_features
     from data_loader import load_file, RAW_DIR
     import sys
 
-    files = sorted(RAW_DIR.glob("*.xlsx"))
-    if not files:
-        print("No files in data/raw/. Symlink or copy the source Excel files there first.")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="Run inference using trained health and forecasting models.")
+    parser.add_argument("--file", type=str, default=None, help="Path to raw Excel or CSV file to score.")
+    args = parser.parse_args()
 
-    print(f"Running inference on: {files[0].name}")
-    df_raw = load_file(files[0])
+    sample_csv = RAW_DIR.parent / "sample" / "sample_telemetry.csv"
+
+    if args.file:
+        fp = Path(args.file)
+        if not fp.exists():
+            print(f"Error: file not found: {fp}")
+            sys.exit(1)
+        print(f"Running inference on: {fp.name}")
+        df_raw = load_file(fp) if fp.suffix in [".xlsx", ".xls"] else pd.read_csv(fp)
+    elif sample_csv.exists():
+        print(f"Running inference on sample telemetry: {sample_csv.name}")
+        df_raw = pd.read_csv(sample_csv)
+    else:
+        files = sorted(RAW_DIR.glob("*.xlsx"))
+        if not files:
+            parent_candidate = RAW_DIR.resolve().parent.parent.parent
+            files = sorted(parent_candidate.glob("*.xlsx"))
+        if files:
+            print(f"Running inference on: {files[0].name}")
+            df_raw = load_file(files[0])
+        else:
+            print("No input telemetry found.")
+            sys.exit(1)
+
     df_feat = build_features(df_raw)
     df_health = predict_health(df_feat)
     df_final  = predict_next_torque(df_health)
-    print(df_final[["elapsed_seconds", "E1TQ_S76C",
-                     "exceedance_prob", "exceedance_pred",
-                     "E1TQ_S76C_predicted_next"]].head(10).to_string())
+    cols_to_show = [c for c in ["elapsed_seconds", "E1TQ_S76C",
+                                "exceedance_prob", "exceedance_pred",
+                                "E1TQ_S76C_predicted_next"] if c in df_final.columns]
+    print("\n--- Model Inference Output (First 10 records) ---")
+    print(df_final[cols_to_show].head(10).to_string(index=False))

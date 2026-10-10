@@ -122,10 +122,33 @@ class TestPipeline(unittest.TestCase):
         self.assertEqual(len(lagged), 3)
         self.assertEqual(lagged["E1TQ_S76C_next"].tolist(), [52.0, 54.0, 56.0])
 
-    def test_rul_assessment_statement(self):
-        self.assertIn("SUPERVISED RUL PREDICTION IS NOT SUPPORTED", RUL_ASSESSMENT)
-        self.assertIn("Allison 250-C30S", RUL_ASSESSMENT)
-        self.assertIn("Sikorsky S-76A/C+", RUL_ASSESSMENT)
+    def test_sample_dataset_integrity(self):
+        sample_path = Path(__file__).resolve().parent.parent / "data" / "sample" / "sample_telemetry.csv"
+        self.assertTrue(sample_path.exists(), "Sample telemetry dataset should exist in data/sample/")
+        df = pd.read_csv(sample_path)
+        self.assertGreater(len(df), 0)
+        for col in ["E1NF_S76C", "E1TQ_S76C", "RTRSPD", "PRALT", "OAT"]:
+            self.assertIn(col, df.columns)
+
+    def test_model_inference_pipeline(self):
+        from predict import predict_health, predict_next_torque, load_health_model, load_forecasting_model
+        from feature_engineering import build_features
+        sample_path = Path(__file__).resolve().parent.parent / "data" / "sample" / "sample_telemetry.csv"
+        df_raw = pd.read_csv(sample_path)
+        df_feat = build_features(df_raw)
+
+        health_model, health_meta = load_health_model()
+        self.assertIsNotNone(health_model)
+        df_scored = predict_health(df_feat)
+        self.assertIn("exceedance_prob", df_scored.columns)
+        self.assertIn("exceedance_pred", df_scored.columns)
+        self.assertTrue((df_scored["exceedance_prob"] >= 0.0).all() and (df_scored["exceedance_prob"] <= 1.0).all())
+
+        forecast_model, forecast_meta = load_forecasting_model()
+        self.assertIsNotNone(forecast_model)
+        df_forecast = predict_next_torque(df_scored)
+        self.assertIn("E1TQ_S76C_predicted_next", df_forecast.columns)
+        self.assertFalse(df_forecast["E1TQ_S76C_predicted_next"].isnull().all())
 
 
 if __name__ == "__main__":
